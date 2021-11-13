@@ -33,7 +33,7 @@ reader.onload = function (e) {
 
     // Update text
     if (pred < 0.5) {
-        conf = 1-Math.round(pred*100*100)/100
+        conf = 100-Math.round(pred*100*100)/100
         $('#pred-text')[0].innerHTML = 'This is a ' + neg_label + '!';
         $('#pred-score')[0].innerHTML = 'I am ' + conf + '% confident that this is a ' + neg_label + '!'
     } else {
