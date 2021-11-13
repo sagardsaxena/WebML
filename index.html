@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Compiled and minified CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="main.css">
+	</head>
+
+	<body class="cyan accent-2">
+		<div class="container">
+			<div class="row">
+				<div class="col s12">
+					<h1 class="center-align pink-text text-accent-2">
+						Is it a Cat or a Dog!
+					</h1>
+				</div>
+			</div>
+			<div class="row">
+			    <div class="col s12">
+				    <div class="card horizontal z-depth-5">
+				      <div class="card-image">
+				        <img id="image" src="dog.jpg">
+				      </div>
+				      <div class="card-stacked">
+				        <div class="card-content">
+				          <p class="flow-text" id="pred-text">
+				          	This is a dog!
+				          </p>
+				          <p class="flow-text" id="pred-score">
+				          	I am 100% confident that this is a dog!
+				          </p>
+				        </div>
+				        <div class="card-action">
+						    <div class="file-field input-field">
+						      <div class="waves-effect waves-light btn flow-text">
+						      	<i class="material-icons right">file_upload</i>
+						        <span>Upload Image</span>
+						        <input id="image_file" type="file">
+						      </div>
+						      <div class="file-path-wrapper">
+						        <input class="file-path validate" type="text" 
+						               onchange="onImageUpload()">
+						      </div>
+						    </div>
+				        </div>
+				      </div>
+				    </div>
+				</div>
+			</div>
+		</div>	
+
+		<!-- Compiled and minified JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+		<script src="script.js"></script>
+	</body>
+</html>
