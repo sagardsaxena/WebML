@@ -19,6 +19,13 @@ reader.onload = function (e) {
     // Scale between 0 and 1
     img = img.mul(scale)
 
+    // Create batch of size 1
+    img = tf.expandDims(img)
+
+    // Get model prediction
+    pred = model.predict(img)
+
+    console.log(pred)
     console.log(img)
 }
 
