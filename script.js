@@ -2,6 +2,9 @@ var reader = new FileReader();
 var model = null;
 var img = null;
 var scale = tf.scalar(1/255);
+var pos_label = 'cat'
+var neg_label = 'dog'
+
 // Load model
 tf.loadLayersModel('model/model.json').then(e => model=e);
 
@@ -25,8 +28,19 @@ reader.onload = function (e) {
     // Get model prediction
     pred = model.predict(img)
 
-    console.log(pred)
-    console.log(img)
+    // Convert tensor to JS array
+    pred = pred.dataSync()[0]
+
+    // Update text
+    if (pred < 0.5) {
+        conf = 1-Math.round(pred*100*100)/100
+        $('#pred-text').innerHTML = 'This is a ' + neg_label + '!';
+        $('#pred-score').innerHTML = 'I am ' + conf + '% confident that this is a ' + neg_label + '!'
+    } else {
+        conf = Math.round(pred*100*100)/100
+        $('#pred-text').innerHTML = 'This is a ' + pos_label + '!';
+        $('#pred-score').innerHTML = 'I am ' + conf + '% confident that this is a ' + pos_label + '!'
+    }
 }
 
 function onImageUpload(){
