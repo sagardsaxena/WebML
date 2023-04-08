@@ -2,11 +2,11 @@ var reader = new FileReader();
 var model = null;
 var img = null;
 var scale = tf.scalar(1/255);
-var pos_label = 'cat'
-var neg_label = 'dog'
+var pos_label = 'dog'
+var neg_label = 'cat'
 
 // Load model
-tf.loadLayersModel('model/model.json').then(e => model=e);
+tf.loadLayersModel('models/classifier/model.json').then(e => model=e);
 
 // Process new image
 reader.onload = function (e) {
