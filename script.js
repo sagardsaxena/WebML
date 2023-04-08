@@ -53,11 +53,11 @@ reader.onload = function (e) {
 
     // Update text
     if (class_pred < 0.5) {
-        conf = 100-Math.round(pred*100*100)/100
+        conf = 100-Math.round(class_pred*100*100)/100
         $('#pred-text')[0].innerHTML = 'This is a ' + neg_label + '!';
         $('#pred-score')[0].innerHTML = 'I am ' + conf + '% confident that this is a ' + neg_label + '!'
     } else {
-        conf = Math.round(pred*100*100)/100
+        conf = Math.round(class_pred*100*100)/100
         $('#pred-text')[0].innerHTML = 'This is a ' + pos_label + '!';
         $('#pred-score')[0].innerHTML = 'I am ' + conf + '% confident that this is a ' + pos_label + '!'
     }
@@ -71,6 +71,7 @@ reader.onload = function (e) {
 	idx = distances[i][1];
 	console.log(dist);
 	console.log(embedding_data["embedding_filenames"][idx]);
+        $(`#image{i}`).attr('src', embedding_data["embedding_filenames"][idx]);
     }
 }
 
