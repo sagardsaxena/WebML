@@ -67,8 +67,8 @@ reader.onload = function (e) {
     distances = distances.map((dist, idx) => [dist, idx]).sort((dist1, dist2) => dist2 - dist1);
 
     for (let i = 0; i < 5; i++) {
-	dist = distances[i][0];
-	idx = distances[i][1];
+	var dist = distances[i][0];
+	var idx = distances[i][1];
 	console.log(dist);
 	console.log(embedding_data["embedding_filenames"][idx]);
         $('#image' + i).attr('src', embedding_data["embedding_filenames"][idx]);
