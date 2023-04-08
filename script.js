@@ -16,6 +16,15 @@ tf.loadLayersModel('models/encoder/model.json').then(e => {
     console.log("Loaded Encoder");
 });
 
+
+// distance between two embeddings
+function distance(v1, v2) {
+    var dist = 0.0;
+    for (let i = 0; i < v1.length; i++)
+	dist += Math.pow((v1[i] - v2[i], 2);
+    return dist;
+}
+
 // Process new image
 reader.onload = function (e) {
     // Update the image on the browser
@@ -34,7 +43,7 @@ reader.onload = function (e) {
     img = tf.expandDims(img)
 
     // Get model prediction
-    class_pred = model.predict(img)
+    class_pred = classifier.predict(img)
     embed_pred = encoder.predict(img)
 
     // Convert tensor to JS array
@@ -51,6 +60,10 @@ reader.onload = function (e) {
         $('#pred-text')[0].innerHTML = 'This is a ' + pos_label + '!';
         $('#pred-score')[0].innerHTML = 'I am ' + conf + '% confident that this is a ' + pos_label + '!'
     }
+
+    // Find closest embeddings
+    distances = embedding_data["embeddings"].map(v => distance(v, embed_pred));
+    distances = distances.map((dist, idx) => [dist, idx]).sort((dist1, dist2) => dist2 - dist1);
 }
 
 function onImageUpload(){
