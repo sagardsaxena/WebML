@@ -7,7 +7,14 @@ var pos_label = 'dog';
 var neg_label = 'cat';
 
 // Load model
-tf.loadLayersModel('models/classifier/model.json').then(e => classifier=e);
+tf.loadLayersModel('models/classifier/model.json').then(e => {
+    classifier=e;
+    console.log("Loaded Classifier");
+});
+tf.loadLayersModel('models/encoder/model.json').then(e => {
+    encoder=e;
+    console.log("Loaded Encoder");
+});
 
 // Process new image
 reader.onload = function (e) {
@@ -35,7 +42,7 @@ reader.onload = function (e) {
     embed_pred = embed_pred.dataSync()[0]
 
     // Update text
-    if (pred < 0.5) {
+    if (class_pred < 0.5) {
         conf = 100-Math.round(pred*100*100)/100
         $('#pred-text')[0].innerHTML = 'This is a ' + neg_label + '!';
         $('#pred-score')[0].innerHTML = 'I am ' + conf + '% confident that this is a ' + neg_label + '!'
@@ -47,6 +54,6 @@ reader.onload = function (e) {
 }
 
 function onImageUpload(){
-	console.log("Hello World")
-	reader.readAsDataURL($('#image_file')[0].files[0]);
+    console.log("Image Uploaded")
+    reader.readAsDataURL($('#image_file')[0].files[0]);
 }
