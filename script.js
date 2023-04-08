@@ -20,8 +20,9 @@ tf.loadLayersModel('models/encoder/model.json').then(e => {
 // distance between two embeddings
 function distance(v1, v2) {
     var dist = 0.0;
-    for (let i = 0; i < v1.length; i++)
-	dist += Math.pow((v1[i] - v2[i], 2);
+    for (let i = 0; i < v1.length; i++) {
+	dist += Math.pow((v1[i] - v2[i], 2));
+    }
     return dist;
 }
 
@@ -64,6 +65,13 @@ reader.onload = function (e) {
     // Find closest embeddings
     distances = embedding_data["embeddings"].map(v => distance(v, embed_pred));
     distances = distances.map((dist, idx) => [dist, idx]).sort((dist1, dist2) => dist2 - dist1);
+
+    for (let i = 0; i < 5; i++) {
+	dist = distances[i][0];
+	idx = distances[i][1];
+	console.log(dist);
+	console.log(embedding_data["embedding_filenames"][idx]);
+    }
 }
 
 function onImageUpload(){
