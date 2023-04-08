@@ -71,7 +71,7 @@ reader.onload = function (e) {
 	idx = distances[i][1];
 	console.log(dist);
 	console.log(embedding_data["embedding_filenames"][idx]);
-        $(`#image{i}`).attr('src', embedding_data["embedding_filenames"][idx]);
+        $('#image' + i).attr('src', embedding_data["embedding_filenames"][idx]);
     }
 }
 
