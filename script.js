@@ -1,16 +1,17 @@
 var reader = new FileReader();
-var model = null;
+var classifier = null;
+var encoder = null;
 var img = null;
 var scale = tf.scalar(1/255);
-var pos_label = 'dog'
-var neg_label = 'cat'
+var pos_label = 'dog';
+var neg_label = 'cat';
 
 // Load model
-tf.loadLayersModel('models/classifier/model.json').then(e => model=e);
+tf.loadLayersModel('models/classifier/model.json').then(e => classifier=e);
 
 // Process new image
 reader.onload = function (e) {
-	// Update the image on the browser
+    // Update the image on the browser
     $('#image').attr('src', e.target.result);
 
     // Load the image as a tensorflow array
@@ -26,10 +27,12 @@ reader.onload = function (e) {
     img = tf.expandDims(img)
 
     // Get model prediction
-    pred = model.predict(img)
+    class_pred = model.predict(img)
+    embed_pred = encoder.predict(img)
 
     // Convert tensor to JS array
-    pred = pred.dataSync()[0]
+    class_pred = class_pred.dataSync()[0]
+    embed_pred = embed_pred.dataSync()[0]
 
     // Update text
     if (pred < 0.5) {
